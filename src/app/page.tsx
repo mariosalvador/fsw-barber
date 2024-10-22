@@ -7,8 +7,9 @@ import { Input } from "@/components/ui/input";
 import { db } from "@/lib/prisma";
 import { mdiMustache, mdiRazorDoubleEdge } from "@mdi/js";
 import Icon from "@mdi/react";
-import { Scissors, Search, Star } from "lucide-react";
+import { Scissors, Search, Star, StarIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
   const barberDb = await db.barbershop.findMany();
@@ -68,7 +69,7 @@ export default async function Home() {
         </div>
 
         <section className="flex w-full flex-col gap-2 px-5 py-3">
-          <h3 className="font-medium text-gray-500">AGENDAMENTOS</h3>
+          <h3 className="text-sm font-bold text-gray-500">AGENDAMENTOS</h3>
 
           <Card className="flex">
             <CardContent className="flex-1 space-y-2 p-3">
@@ -101,7 +102,7 @@ export default async function Home() {
         </section>
 
         <section className="w-full space-y-2 px-5 py-3">
-          <h3 className="font-medium text-gray-500">RECOMENDADOS</h3>
+          <h3 className="text-sm font-bold text-gray-500">RECOMENDADOS</h3>
 
           <div className="flex w-full gap-5 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
             {barberDb.map((value) => (
@@ -117,7 +118,7 @@ export default async function Home() {
                     />
 
                     <Badge className="absolute left-2 top-2 flex h-5 max-w-max items-center gap-1 bg-secondary/80 p-2">
-                      <Star size={12} className="text-primary" />
+                      <StarIcon size={12} className="text-primary" />
                       5,0
                     </Badge>
                   </div>
@@ -129,8 +130,10 @@ export default async function Home() {
                     <p className="truncate text-sm text-gray-500">
                       {value.address}
                     </p>
-                    <Button className="h-[36px] w-full bg-secondary">
-                      Reservar
+                    <Button className="h-[36px] w-full bg-secondary" asChild>
+                      <Link href={`/barbershop/details/${value.id}`}>
+                        Reservar
+                      </Link>
                     </Button>
                   </section>
                 </CardContent>
@@ -140,7 +143,7 @@ export default async function Home() {
         </section>
 
         <section className="w-full space-y-2 px-5 py-3">
-          <h3 className="font-medium text-gray-500">POPULARES</h3>
+          <h3 className="text-sm font-bold text-gray-500">POPULARES</h3>
 
           <div className="flex w-full gap-5 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
             {populars.map((value) => (
@@ -166,8 +169,10 @@ export default async function Home() {
                     <p className="truncate text-sm text-gray-500">
                       {value.address}
                     </p>
-                    <Button className="h-[36px] w-full bg-secondary">
-                      Reservar
+                    <Button className="h-[36px] w-full bg-secondary" asChild>
+                      <Link href={`/barbershop/details/${value.id}`}>
+                        Reservar
+                      </Link>
                     </Button>
                   </section>
                 </CardContent>
