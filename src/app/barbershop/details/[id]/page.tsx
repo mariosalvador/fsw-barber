@@ -4,6 +4,7 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { db } from "@/lib/prisma";
@@ -40,6 +41,7 @@ const BarbershopDetails = async ({ params }: { params: { id: string } }) => {
       <div className="relative h-[250px] w-full">
         <Image
           alt={barbershopDetails?.name}
+          priority
           src={barbershopDetails?.imageURL}
           fill
           className="h-[250px] w-[390px] object-cover"
@@ -58,7 +60,9 @@ const BarbershopDetails = async ({ params }: { params: { id: string } }) => {
             </Button>
           </SheetTrigger>
           <SheetContent>
-            <SheetHeader className="w-full text-start">Menu</SheetHeader>
+            <SheetHeader className="w-full text-start">
+              <SheetTitle>Menu</SheetTitle>
+            </SheetHeader>
 
             <div className="h-full w-full pt-3">
               <div className="mb-3 flex w-full items-center justify-between border-b pb-4">

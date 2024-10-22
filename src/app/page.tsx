@@ -1,23 +1,17 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Header } from "@/components/header";
+import { Header } from "@/components/main-screen-components/header";
 import { Input } from "@/components/ui/input";
-import { db } from "@/lib/prisma";
 import { mdiMustache, mdiRazorDoubleEdge } from "@mdi/js";
 import Icon from "@mdi/react";
-import { Scissors, Search, Star, StarIcon } from "lucide-react";
+import { Scissors, Search } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+
+import { SchedulingBarber } from "@/components/main-screen-components/scheduling-barber";
+import { RecommendedBarber } from "@/components/main-screen-components/recommended-barber";
+import { PopularBarber } from "@/components/main-screen-components/popular-barber";
+import { Footer } from "@/components/main-screen-components/footer";
 
 export default async function Home() {
-  const barberDb = await db.barbershop.findMany();
-  const populars = await db.barbershop.findMany({
-    orderBy: {
-      name: "desc",
-    },
-  });
   return (
     <>
       <Header />
@@ -25,7 +19,7 @@ export default async function Home() {
         <section className="w-full px-5 py-6">
           <article className="flex w-full flex-col gap-1">
             <h2 className="text-lg">
-              Olá, <span className="font-semibold">Mário</span>{" "}
+              Olá, <span className="font-semibold">Mário</span>
             </h2>
             <span className="text-md">Sexta, 25 Outubro</span>
           </article>
@@ -68,125 +62,13 @@ export default async function Home() {
           />
         </div>
 
-        <section className="flex w-full flex-col gap-2 px-5 py-3">
-          <h3 className="text-sm font-bold text-gray-500">AGENDAMENTOS</h3>
+        <SchedulingBarber />
 
-          <Card className="flex">
-            <CardContent className="flex-1 space-y-2 p-3">
-              <Badge
-                variant={"outline"}
-                className="flex h-5 w-[80px] items-center justify-center bg-primary/20 text-primary"
-              >
-                Confirmado
-              </Badge>
+        <RecommendedBarber />
 
-              <h2 className="font-semibold">Corte de Cabelo</h2>
-              <section className="flex w-full items-center gap-3">
-                <Avatar>
-                  <AvatarImage
-                    src={
-                      "https://utfs.io/f/c97a2dc9-cf62-468b-a851-bfd2bdde775f-16p.png"
-                    }
-                  />
-                </Avatar>
-                Vintage Barber
-              </section>
-            </CardContent>
+        <PopularBarber />
 
-            <section className="flex w-[108px] flex-col items-center justify-center border border-l-2 p-3">
-              <p className="text-xs">Outubro</p>
-              <p className="text-lg font-semibold">26</p>
-              <p className="text-xs">09:45</p>
-            </section>
-          </Card>
-        </section>
-
-        <section className="w-full space-y-2 px-5 py-3">
-          <h3 className="text-sm font-bold text-gray-500">RECOMENDADOS</h3>
-
-          <div className="flex w-full gap-5 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-            {barberDb.map((value) => (
-              <Card key={value.id} className="h-[230px] w-[260px]">
-                <CardContent className="space-y-5 p-0">
-                  <div className="relative max-h-max w-[160px] p-1 [&::-webkit-scrollbar]:hidden">
-                    <Image
-                      src={value.imageURL}
-                      alt={value.name}
-                      width={160}
-                      height={160}
-                      className="relative rounded-lg"
-                    />
-
-                    <Badge className="absolute left-2 top-2 flex h-5 max-w-max items-center gap-1 bg-secondary/80 p-2">
-                      <StarIcon size={12} className="text-primary" />
-                      5,0
-                    </Badge>
-                  </div>
-
-                  <section className="w-[160px] space-y-1.5 px-2">
-                    <h3 className="text-md truncate font-semibold">
-                      {value.name}
-                    </h3>
-                    <p className="truncate text-sm text-gray-500">
-                      {value.address}
-                    </p>
-                    <Button className="h-[36px] w-full bg-secondary" asChild>
-                      <Link href={`/barbershop/details/${value.id}`}>
-                        Reservar
-                      </Link>
-                    </Button>
-                  </section>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        <section className="w-full space-y-2 px-5 py-3">
-          <h3 className="text-sm font-bold text-gray-500">POPULARES</h3>
-
-          <div className="flex w-full gap-5 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-            {populars.map((value) => (
-              <Card key={value.id} className="h-[230px] w-[260px]">
-                <CardContent className="space-y-5 p-0">
-                  <div className="relative max-h-max w-[160px] p-1 [&::-webkit-scrollbar]:hidden">
-                    <Image
-                      src={value.imageURL}
-                      alt={value.name}
-                      width={160}
-                      height={160}
-                      className="relative rounded-lg"
-                    />
-                    <Badge className="absolute left-2 top-2 flex h-5 max-w-max items-center gap-1 bg-secondary/80 p-2">
-                      <Star size={12} className="text-primary" />
-                      5,0
-                    </Badge>
-                  </div>
-                  <section className="w-[160px] space-y-1.5 px-2">
-                    <h3 className="text-md truncate font-semibold">
-                      {value.name}
-                    </h3>
-                    <p className="truncate text-sm text-gray-500">
-                      {value.address}
-                    </p>
-                    <Button className="h-[36px] w-full bg-secondary" asChild>
-                      <Link href={`/barbershop/details/${value.id}`}>
-                        Reservar
-                      </Link>
-                    </Button>
-                  </section>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        <footer className="h-[60px] w-full bg-secondary px-5 py-6">
-          <p className="text-gray-500">
-            © 2023 Copyright{" "}
-            <span className="font-bold text-gray-400">FSW Barber</span>{" "}
-          </p>
-        </footer>
+        <Footer />
       </div>
     </>
   );
