@@ -1,3 +1,4 @@
+import { CopyButton } from "@/components/copybutton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -193,12 +194,7 @@ const BarbershopDetails = async ({ params }: { params: { id: string } }) => {
               {phones}
             </span>
 
-            <Button
-              variant={"outline"}
-              className="h-[36px] w-[90px] font-semibold"
-            >
-              Copiar
-            </Button>
+            <CopyButton key={index} value={phones} />
           </div>
         ))}
       </div>
