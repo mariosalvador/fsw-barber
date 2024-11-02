@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/main-screen-components/header";
-import { Input } from "@/components/ui/input";
 import { mdiMustache, mdiRazorDoubleEdge } from "@mdi/js";
 import Icon from "@mdi/react";
-import { Scissors, Search } from "lucide-react";
+import { Scissors } from "lucide-react";
 import Image from "next/image";
 
 import { SchedulingBarber } from "@/components/main-screen-components/scheduling-barber";
 import { RecommendedBarber } from "@/components/main-screen-components/recommended-barber";
 import { PopularBarber } from "@/components/main-screen-components/popular-barber";
 import { Footer } from "@/components/main-screen-components/footer";
+import { SearchInput } from "@/components/search-input";
 
 export default async function Home() {
   return (
@@ -25,10 +25,7 @@ export default async function Home() {
           </article>
         </section>
 
-        <div className="flex w-full items-center gap-2 p-5">
-          <Input placeholder="Buscar barbearias..." />
-          <Search className="h-[36px] w-[40px] rounded-md bg-primary p-[10px]" />
-        </div>
+        <SearchInput />
 
         <div className="flex gap-3 overflow-x-scroll px-5 [&::-webkit-scrollbar]:hidden">
           <Button className="flex h-10 items-center gap-2 bg-secondary px-4 py-3 font-semibold antialiased">
@@ -59,6 +56,7 @@ export default async function Home() {
             width={150}
             height={150}
             className="h-[150px] w-full rounded-lg object-cover"
+            priority
           />
         </div>
 
