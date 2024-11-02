@@ -1,6 +1,6 @@
-import { Menu } from "lucide-react";
 import Image from "next/image";
 import { Card, CardContent } from "../../ui/card";
+import { SideBarSheet } from "@/components/sidebar-sheet";
 
 export const Header = () => {
   return (
@@ -15,7 +15,7 @@ export const Header = () => {
             className="h-[50px] w-[150px]"
           />
 
-          <Menu className="size-[28px]" />
+          <SideBarSheet />
         </CardContent>
       </Card>
     </header>

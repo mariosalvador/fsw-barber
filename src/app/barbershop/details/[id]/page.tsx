@@ -1,24 +1,9 @@
 import { CopyButton } from "@/components/copybutton";
+import { SideBarSheet } from "@/components/sidebar-sheet";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { db } from "@/lib/prisma";
-import {
-  CalendarDays,
-  ChevronLeft,
-  Home,
-  LogOut,
-  MapPin,
-  Menu,
-  Smartphone,
-  Star,
-} from "lucide-react";
+import { ChevronLeft, MapPin, Smartphone, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -54,71 +39,7 @@ const BarbershopDetails = async ({ params }: { params: { id: string } }) => {
           </Link>
         </Button>
 
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button className="absolute right-4 top-4 bg-secondary">
-              <Menu className="size-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent>
-            <SheetHeader className="w-full text-start">
-              <SheetTitle>Menu</SheetTitle>
-            </SheetHeader>
-
-            <div className="h-full w-full pt-3">
-              <div className="mb-3 flex w-full items-center justify-between border-b pb-4">
-                <p className="text-md font-semibold text-white antialiased">
-                  Olá. Faça o seu login
-                </p>
-
-                <Button className="bg-primary">
-                  <LogOut size={24} />
-                </Button>
-              </div>
-
-              <div className="mb-3 w-full space-y-2 border-b pb-4">
-                <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
-                  <Home size={18} />
-                  Cabelo
-                </Button>
-
-                <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
-                  <CalendarDays size={18} />
-                  Barba
-                </Button>
-              </div>
-
-              <div className="mb-3 w-full space-y-2 border-b pb-4">
-                <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
-                  <Home size={18} />
-                  Acabamento
-                </Button>
-
-                <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
-                  <CalendarDays size={18} />
-                  Sobrancelhas
-                </Button>
-
-                <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
-                  <CalendarDays size={18} />
-                  Massagem
-                </Button>
-
-                <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
-                  <CalendarDays size={18} />
-                  Hidratação
-                </Button>
-              </div>
-
-              <div className="mb-3 w-full space-y-2 pb-4">
-                <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
-                  <LogOut size={18} />
-                  Sair conta
-                </Button>
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+        <SideBarSheet />
       </div>
 
       <section className="borber max-h-max w-full space-y-4 border-b px-5 py-4">
