@@ -17,9 +17,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-// import { Avatar, AvatarImage } from "../ui/avatar";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export const SideBarSheet = () => {
+  const { data } = useSession();
+  const handleLoginWithGoogleCheck = () => signIn("google");
+  const handleLogOutWithGoogle = () => signOut();
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -33,44 +38,50 @@ export const SideBarSheet = () => {
         </SheetHeader>
 
         <div className="h-full w-full pt-3">
-          <div className="mb-3 flex w-full items-center justify-between border-b pb-4">
-            <p className="text-md font-semibold text-white antialiased">
-              Olá. Faça o seu login
-            </p>
+          {data?.user ? (
+            <div className="mb-3 flex gap-2 border-b pb-4">
+              <Avatar className="size-14">
+                <AvatarFallback className="size-10 bg-gray-300"></AvatarFallback>
+                <AvatarImage src={data.user?.image ?? ""}></AvatarImage>
+              </Avatar>
+              <section>
+                <h2 className="text-lg font-semibold">{data.user.name}</h2>
+                <span className="text-sm text-gray-300">{data.user.email}</span>
+              </section>
+            </div>
+          ) : (
+            <div className="mb-3 flex w-full items-center justify-between border-b pb-4">
+              <p className="text-md font-semibold text-white antialiased">
+                Olá. Faça o seu login
+              </p>
 
-            <Dialog>
-              <DialogTrigger>
-                <Button className="bg-primary">
-                  <LogOut size={24} />
-                </Button>
-              </DialogTrigger>
+              <Dialog>
+                <DialogTrigger>
+                  <Button className="bg-primary">
+                    <LogOut size={24} />
+                  </Button>
+                </DialogTrigger>
 
-              <DialogContent className="w-[90%] rounded-lg">
-                <DialogHeader>
-                  <DialogTitle>Fazer login na App</DialogTitle>
+                <DialogContent className="w-[90%] rounded-lg">
+                  <DialogHeader>
+                    <DialogTitle>Fazer login na App</DialogTitle>
 
-                  <DialogDescription>
-                    Conecte-se usando sua conta do Google
-                  </DialogDescription>
-                </DialogHeader>
+                    <DialogDescription>
+                      Conecte-se usando sua conta do Google
+                    </DialogDescription>
+                  </DialogHeader>
 
-                <Button variant={"secondary"} className="">
-                  <Globe />
-                  Google
-                </Button>
-              </DialogContent>
-            </Dialog>
-          </div>
-
-          {/* <div className="flex mb-3  border-b pb-4">
-            <Avatar>
-              <AvatarImage>OLA</AvatarImage>
-            </Avatar>
-            <section>
-              <h2>Mario Paulo</h2>
-              <span>mario@gmail.com</span>
-            </section>
-          </div> */}
+                  <Button
+                    variant={"secondary"}
+                    onClick={handleLoginWithGoogleCheck}
+                  >
+                    <Globe />
+                    Google
+                  </Button>
+                </DialogContent>
+              </Dialog>
+            </div>
+          )}
 
           <div className="mb-3 w-full space-y-2 border-b pb-4">
             <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
@@ -107,7 +118,10 @@ export const SideBarSheet = () => {
           </div>
 
           <div className="mb-3 w-full space-y-2 pb-4">
-            <Button className="flex w-full items-center justify-start gap-3 bg-transparent">
+            <Button
+              onClick={handleLogOutWithGoogle}
+              className="flex w-full items-center justify-start gap-3 bg-transparent"
+            >
               <LogOut size={18} />
               Sair conta
             </Button>
