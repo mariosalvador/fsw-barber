@@ -4,6 +4,7 @@ import { CalendarDays, Globe, Home, LogOut, Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -35,6 +36,7 @@ export const SideBarSheet = () => {
       <SheetContent>
         <SheetHeader className="w-full text-start">
           <SheetTitle>Menu</SheetTitle>
+          <SheetDescription></SheetDescription>
         </SheetHeader>
 
         <div className="h-full w-full pt-3">
@@ -56,7 +58,7 @@ export const SideBarSheet = () => {
               </p>
 
               <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                   <Button className="bg-primary">
                     <LogOut size={24} />
                   </Button>

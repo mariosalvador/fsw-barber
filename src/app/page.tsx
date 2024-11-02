@@ -1,8 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { Header } from "@/components/main-screen-components/header";
-import { mdiMustache, mdiRazorDoubleEdge } from "@mdi/js";
-import Icon from "@mdi/react";
-import { Scissors } from "lucide-react";
 import Image from "next/image";
 
 import { SchedulingBarber } from "@/components/main-screen-components/scheduling-barber";
@@ -10,6 +6,7 @@ import { RecommendedBarber } from "@/components/main-screen-components/recommend
 import { PopularBarber } from "@/components/main-screen-components/popular-barber";
 import { Footer } from "@/components/main-screen-components/footer";
 import { SearchInput } from "@/components/search-input";
+import { BarberServicesToSearch } from "@/components/main-screen-components/barber-services-to-search";
 
 export default async function Home() {
   return (
@@ -26,28 +23,7 @@ export default async function Home() {
         </section>
 
         <SearchInput />
-
-        <div className="flex gap-3 overflow-x-scroll px-5 [&::-webkit-scrollbar]:hidden">
-          <Button className="flex h-10 items-center gap-2 bg-secondary px-4 py-3 font-semibold antialiased">
-            <Scissors size={"24px"} />
-            Cabelo
-          </Button>
-
-          <Button className="flex h-10 items-center gap-2 bg-secondary px-4 py-3 font-semibold antialiased">
-            <Icon path={mdiMustache} size={"24px"} />
-            Barba
-          </Button>
-
-          <Button className="flex h-10 items-center gap-2 bg-secondary px-4 py-3 font-semibold antialiased">
-            <Icon path={mdiRazorDoubleEdge} size={"24px"} />
-            Sobrancelhas
-          </Button>
-
-          <Button className="flex h-10 items-center gap-2 bg-secondary px-4 py-3 font-semibold antialiased">
-            <Scissors size={"24px"} />
-            Gelinho
-          </Button>
-        </div>
+        <BarberServicesToSearch />
 
         <div className="flex w-full items-center justify-center px-5">
           <Image
